@@ -9,5 +9,5 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
-def cats_index(request):
+def pokemon_index(request):
   return render(request, 'pokemon/index.html', { 'pokemons': pokemons})
