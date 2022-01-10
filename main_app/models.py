@@ -10,7 +10,7 @@ class Pokemon:  # Note that parens are optional if not inheriting from another c
     self.type2 = type2
     self.generation = generation
 
-pokemon = [
+pokemons = [
     Pokemon('Bulbasaur','1','Seed Pokémon','grass','poison','1'),
     Pokemon('Ivysaur','2','Seed Pokémon','grass','poison','1'),
     Pokemon('Venusaur','3','Seed Pokémon','grass','poison','1'),
