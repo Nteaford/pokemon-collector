@@ -4,7 +4,7 @@ from .models import pokemons as pokemons
 
 # Create your views here.
 def home(request):
-  return HttpResponse('Welcome to the Pokemon Center Homepage')
+  return render(request, 'home.html')
 
 def about(request):
   return render(request, 'about.html')
