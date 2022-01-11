@@ -16,3 +16,4 @@ def pokemon_index(request):
 def pokemon_detail(request, pokemon_id):
   pokemon = Pokemon.objects.get(id=pokemon_id)
   return render(request, 'pokemon/detail.html', {'pokemon': pokemon})
+
