@@ -9,6 +9,8 @@ class Pokemon(models.Model):  # Note that parens are optional if not inheriting 
     type2 = models.CharField(max_length=100)
     generation = models.IntegerField()
 
+    def __str__(self):
+        return f"({self.pokedex_number}) - {self.name}"
 
 # pokemons = [
 #     Pokemon('Bulbasaur','1','Seed Pokémon','grass','poison','1'),

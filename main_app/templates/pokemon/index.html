@@ -10,11 +10,6 @@
       <span class="card-title">{{ pokemon.name }}</span>
       <p>Pokedex Number: {{ pokemon.pokedex_number }}</p>
       <p>Classification: {{ pokemon.classfication }}</p>
-      <p>Type One: {{ pokemon.type1 }}</p>
-      {% if pokemon.type2 != 'n/a' %}
-        <p>Type Two: {{ pokemon.type2 }}</p>
-      {% endif %}
-      <p>Generation: {{ pokemon.generation }}</p>
     </div>
   </div>
 {% endfor %}
