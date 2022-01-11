@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Pokemon(models.Model):  # Note that parens are optional if not inheriting from another class
@@ -11,6 +12,9 @@ class Pokemon(models.Model):  # Note that parens are optional if not inheriting 
 
     def __str__(self):
         return f"({self.pokedex_number}) - {self.name}"
+    
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pokemon_id': self.id})
 
 # pokemons = [
 #     Pokemon('Bulbasaur','1','Seed Pokémon','grass','poison','1'),
