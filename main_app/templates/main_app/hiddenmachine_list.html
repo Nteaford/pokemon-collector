@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>HM List</h1>
+
+{% for hiddenmachine in hiddenmachine_list %}
+  <a href="{% url 'hiddenmachine_detail' hiddenmachine.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ hiddenmachine.name }}</span>
+            <p>Description: {{ hiddenmachine.description }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

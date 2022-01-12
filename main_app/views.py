@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import GymBadge, Pokemon
+from django.views.generic import ListView, DetailView
+from .models import GymBadge, Pokemon, HiddenMachine
 from .forms import GymBadgeForm
 
 # Create your views here.
@@ -45,3 +46,20 @@ class PokemonDelete(DeleteView):
   model = Pokemon
   success_url = '/pokemon/'
 
+class HiddenMachineList(ListView):
+  model = HiddenMachine
+
+class HiddenMachineDetail(DetailView):
+  model = HiddenMachine
+
+class HiddenMachineCreate(CreateView):
+  model = HiddenMachine
+  fields = '__all__'
+
+class HiddenMachineUpdate(UpdateView):
+  model = HiddenMachine
+  fields = ['name', 'color']
+
+class HiddenMachineDelete(DeleteView):
+  model = HiddenMachine
+  success_url = '/hiddenmachine/'
