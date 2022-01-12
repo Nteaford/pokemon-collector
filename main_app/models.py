@@ -1,6 +1,36 @@
 from django.db import models
 from django.urls import reverse
 
+BADGES = (
+    ("Boulder","Boulder Badge" ),
+    ("Cascade","Cascade Badge" ),
+    ("Thunder","Thunder Badge" ),
+    ("Rainbow","Rainbow Badge" ),
+    ("Soul","Soul Badge" ),
+    ("Marsh","Marsh Badge" ),
+    ("Volcano","Volcano Badge" ),
+    ("Earth","Earth Badge" ),
+    ("Zephyr","Zephyr Badge" ),
+    ("Hive","Hive Badge" ),
+    ("Plain","Plain Badge" ),
+    ("Fog","Fog Badge" ),
+    ("Storm","Storm Badge" ),
+    ("Mineral","Mineral Badge" ),
+    ("Glacier","Glacier Badge" ),
+    ("Rising","Rising Badge" ),
+    ("Stone","Stone Badge" ),
+    ("Knuckle","Knuckle Badge" ),
+    ("Dynamo","Dynamo Badge" ),
+    ("Heat","Heat Badge" ),
+    ("Balance","Balance Badge" ),
+    ("Feather","Feather Badge" ),
+    ("Mind","Mind Badge" ),
+    ("Rain","Rain Badge" )
+)
+
+
+
+
 # Create your models here.
 class Pokemon(models.Model):  # Note that parens are optional if not inheriting from another class
     name = models.CharField(max_length=100)
@@ -15,6 +45,24 @@ class Pokemon(models.Model):  # Note that parens are optional if not inheriting 
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pokemon_id': self.id})
+
+
+
+class GymBadge(models.Model):
+    badge = models.CharField(max_length=25,  
+    choices = BADGES,
+    default = BADGES[0][0]
+    )
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.get_badge_display()}"
+    
+
+
+
+
+
 
 # pokemons = [
 #     Pokemon('Bulbasaur','1','Seed Pokémon','grass','poison','1'),
