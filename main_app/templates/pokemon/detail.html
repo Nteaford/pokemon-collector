@@ -33,7 +33,9 @@
             <tbody>
                 {% for badge in pokemon.gymbadge_set.all %}
                 <tr>
-                    <td>{{gymbadge.badge}}</td>
+                    <td>{{badge.badge}}</td>
+                    <td>  <a href="{% url 'remove_badge' badge.id %}">Remove</a> </td>
+                    </div>
                 </tr>
                 {% endfor %}
             </tbody>

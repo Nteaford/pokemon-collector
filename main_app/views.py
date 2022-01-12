@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Pokemon
+from .models import GymBadge, Pokemon
 from .forms import GymBadgeForm
 
 # Create your views here.
@@ -26,6 +26,10 @@ def add_badge(request, pokemon_id):
     new_badge = form.save(commit = False)
     new_badge.pokemon_id = pokemon_id
     new_badge.save()
+  return redirect('detail', pokemon_id = pokemon_id)
+
+def remove_badge(request, badge_id, pokemon_id):
+  GymBadge.objects.get(id=badge_id).pokemon.remove(pokemon_id)
   return redirect('detail', pokemon_id = pokemon_id)
 
 class PokemonCreate(CreateView):
