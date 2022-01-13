@@ -32,6 +32,10 @@ BADGES = (
 
 
 # Create your models here.
+class HiddenMachine(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=350)
+
 class Pokemon(models.Model):  # Note that parens are optional if not inheriting from another class
     name = models.CharField(max_length=100)
     pokedex_number = models.IntegerField()
@@ -39,6 +43,7 @@ class Pokemon(models.Model):  # Note that parens are optional if not inheriting 
     type1 = models.CharField(max_length=100)
     type2 = models.CharField(max_length=100)
     generation = models.IntegerField()
+    hiddenmachines = models.ManyToManyField(HiddenMachine)
 
     def __str__(self):
         return f"({self.pokedex_number}) - {self.name}"
@@ -59,10 +64,6 @@ class GymBadge(models.Model):
         return f"{self.get_badge_display()}"
     
 
-
-class HiddenMachine(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(max_length=350)
 
 
 

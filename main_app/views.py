@@ -18,8 +18,9 @@ def pokemon_index(request):
 
 def pokemon_detail(request, pokemon_id):
   pokemon = Pokemon.objects.get(id=pokemon_id)
+  hiddenmachines_pokemon_hasnt_learned = HiddenMachine.objects.exclude(id__in=pokemon.hiddenmachines.all().values_list('id'))
   gym_badge_form = GymBadgeForm()
-  return render(request, 'pokemon/detail.html', {'pokemon': pokemon, 'gym_badge_form': gym_badge_form})
+  return render(request, 'pokemon/detail.html', {'pokemon': pokemon, 'gym_badge_form': gym_badge_form, 'hiddenmachines':hiddenmachines_pokemon_hasnt_learned})
 
 def add_badge(request, pokemon_id):
   form = GymBadgeForm(request.POST)
@@ -29,13 +30,13 @@ def add_badge(request, pokemon_id):
     new_badge.save()
   return redirect('detail', pokemon_id = pokemon_id)
 
-def remove_badge(request, badge_id, pokemon_id):
-  GymBadge.objects.get(id=badge_id).pokemon.remove(pokemon_id)
+def remove_badge(request, pokemon_id, badge_id):
+  GymBadge.objects.get(id=badge_id).delete()
   return redirect('detail', pokemon_id = pokemon_id)
 
 class PokemonCreate(CreateView):
   model = Pokemon
-  fields = '__all__'
+  fields = [ 'name','pokedex_number', 'classification', 'type1', 'type2', 'generation']
 
 class PokemonUpdate(UpdateView):
   model = Pokemon
@@ -55,6 +56,7 @@ class HiddenMachineDetail(DetailView):
 class HiddenMachineCreate(CreateView):
   model = HiddenMachine
   fields = '__all__'
+  success_url = '/hiddenmachine/'
 
 class HiddenMachineUpdate(UpdateView):
   model = HiddenMachine
@@ -63,3 +65,7 @@ class HiddenMachineUpdate(UpdateView):
 class HiddenMachineDelete(DeleteView):
   model = HiddenMachine
   success_url = '/hiddenmachine/'
+
+def assoc_hiddenmachine(request, pokemon_id, hiddenmachine_id):
+  Pokemon.objects.get(id=pokemon_id).hiddenmachines.add(hiddenmachine_id)
+  return redirect('detail', pokemon_id=pokemon_id)
